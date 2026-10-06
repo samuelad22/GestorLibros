@@ -1,0 +1,134 @@
+/* =============================================================
+   Lorevia · Tema visual (paleta, tipografía y tokens globales)
+   ------------------------------------------------------------------
+   Paleta del proyecto (referencia para todo el CSS):
+
+     #7371FC  primario        botón principal, enlaces activos, foco
+     #A594F9  secundario      hovers suaves, elementos secundarios, gradientes
+     #CDC1FF  terciario       chips, badges, píldoras de selección, acentos
+     #F5EFFF  fondo claro     fondo de la app y superficies
+     #E5D9F2  fondo alterno   tarjetas alternas, filas de tabla,
+                              bordes suaves, hovers neutros
+
+   Criterios de uso:
+   · El primario se reserva para acciones principales y el foco
+     visible (:focus-visible). Nunca se usa como superficie.
+   · El secundario se usa para elementos secundarios, hovers suaves
+     y los gradientes decorativos de las páginas de autenticación.
+   · El terciario se usa en acentos de bajo peso visual: chips,
+     píldoras de selección marcadas y bordes de selección.
+   · Los fondos claros (F5EFFF / E5D9F2) y la superficie blanca
+     estructuran la interfaz; sobre ellos el texto usa violeta
+     oscuro (--color-texto) para garantizar contraste AA.
+   · El peligro mantiene la familia cromática (rojo-magenta) para
+     no romper la armonía con el resto de la paleta.
+   ============================================================= */
+
+:root {
+  /* Paleta principal */
+  --color-primario: #7371fc;
+  --color-primario-hover: #8e8cf8;
+  --color-primario-activo: #5f5cf0;
+  --color-primario-contraste: #ffffff;
+  --color-secundario: #a594f9;
+  --color-secundario-hover: #b9aefb;
+  --color-terciario: #cdc1ff;
+  --color-terciario-hover: #dcd3ff;
+  --color-terciario-suave: #ede6fc;
+
+  /* Superficies y fondos */
+  --color-fondo: #f5efff;
+  --color-fondo-alternativo: #e5d9f2;
+  --color-superficie: #ffffff;
+  --color-superficie-alternativa: #f4effb;
+
+  /* Bordes y foco */
+  --color-borde: #e5d9f2;
+  --color-borde-fuerte: #cdc1ff;
+  --color-enfoque: #7371fc;
+  --color-enfoque-anillo: rgba(115, 113, 252, 0.22);
+
+  /* Texto (violeta oscuro legible sobre fondos claros) */
+  --color-texto: #2c2450;
+  --color-muted: #6e6590;
+
+  /* Peligro (rojo-magenta armonizado con la paleta) */
+  --color-peligro: #c63e63;
+  --color-peligro-hover: #da5e82;
+  --color-peligro-activo: #a93252;
+  --color-peligro-contraste: #ffffff;
+
+  /* Geometría */
+  --radio-borde: 0.625rem;
+  --radio-borde-suave: 0.875rem;
+  --radio-pildora: 999px;
+  --espaciado-unitario: 0.25rem;
+
+  /* Sombras */
+  --sombra-suave: 0 1px 2px rgba(44, 36, 80, 0.04), 0 4px 16px rgba(44, 36, 80, 0.07);
+  --sombra-media: 0 2px 4px rgba(44, 36, 80, 0.05), 0 12px 28px rgba(115, 113, 252, 0.16);
+  --sombra-modal: 0 16px 48px rgba(44, 36, 80, 0.28);
+
+  /* Tipografía (Inter, con apoyo de fuentes de sistema) */
+  --fuente-principal: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --tamano-titulo-pagina: 1.5rem;
+  --tamano-titulo-tarjeta: 1.125rem;
+  --tamano-titulo-detalle: 1.75rem;
+  --tamano-cuerpo: 1rem;
+  --tamano-pie: 0.875rem;
+
+  /* Movimiento (siempre ≤ 300 ms, ver src/styles/animaciones.css) */
+  --duracion-transicion: 160ms;
+  --duracion-entrada: 260ms;
+  --curva-suave: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--fuente-principal);
+  font-size: var(--tamano-cuerpo);
+  line-height: 1.5;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background-color: var(--color-terciario);
+  color: var(--color-texto);
+}
+
+/* Foco accesible en primario (anillo visible y coherente en toda la app) */
+:where(button, a, input:not([type='checkbox']), textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-enfoque);
+  outline-offset: 2px;
+}
